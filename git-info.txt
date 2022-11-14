@@ -1,0 +1,7 @@
+https://code2care.org/howto/install-git-on-windows   -> great resource to set up git for people who are confused
+
+git init 			- create empty repository in current working directory
+git add . 			- staging all of the files inside of the local directory, getting them ready to commit
+git commit -m "description"	- commits the files to the local repository, the description for the first commit is "First commit"
+git remote add origin ${url}	- gets the connects the remote repository with the local repo
+git push -u origin master	- pushes the local repo into the remote repo 
