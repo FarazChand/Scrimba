@@ -22,27 +22,31 @@ p {
     font-size: 18px;
 }
 
-.links {
-    margin-top: 45px;
-    margin-bottom: 0;
-} 
+
 
 .accent-color{
     color: #FFE600;
 }
 
-a:link, a:visited {
+a{
     color: #FFE600;
 }
 
+a:hover,
 a:focus {
-    color:aquamarine;
+    color:#807300
 }
 
-a:hover {
-    color: firebrick;
+.button {
+    background-color: #FFE600;
+    color: black;
+    display: inline-block;
+    margin-right: 25px;
+    padding: 15px 30px;
+    text-decoration: none;
 }
 
-a:active {
-    color: plum;
-}
+.links {
+    margin-top: 0;
+    margin-bottom: 0;
+} 
