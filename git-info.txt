@@ -1,7 +1,23 @@
-https://code2care.org/howto/install-git-on-windows   -> great resource to set up git for people who are confused
+https://git-scm.com/download/win			-> download git, first step
+https://code2care.org/howto/install-git-on-windows   	-> great resource to set up git for people who are confused
+https://www.youtube.com/watch?v=wrb7Gge9yoE		-> not a bad walkthrough of the commands
+
+
+Creating a repo:
+- First create the remote repo on github
+- Go to the download code button ( green ) and copy the url they provide (url to remote repo)
+- Then go into the directory that you want to be stored in this remote repo, this will be your local repo.
+- write these commands in your vsCode terminal
 
 git init 			- create empty repository in current working directory
 git add . 			- staging all of the files inside of the local directory, getting them ready to commit
 git commit -m "description"	- commits the files to the local repository, the description for the first commit is "First commit"
-git remote add origin ${url}	- gets the connects the remote repository with the local repo
+git remote add origin url...	- gets the connects the remote repository with the local repo ( url is the url that github gives you for your remote repo when you click download code)
 git push -u origin master	- pushes the local repo into the remote repo 
+
+
+Updating existing remote repo:
+git add .			- same thing as above
+git commit -m "description"	- same thing, description is just describing what changed
+git push -u origin master	- same thing as above, final step ;D
+

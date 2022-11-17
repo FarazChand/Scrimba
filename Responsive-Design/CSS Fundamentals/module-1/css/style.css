@@ -1,16 +1,12 @@
+/* General Starting Point */
 
 
-
-
-.card {
-    background: #000;
-    color: white;
-    width: 560px;
-    margin: 0 auto;
-    padding: 50px;
+body {
+    margin:0;
 }
 
-h1, p {
+/* Typography */
+h1, h2, p {
     margin-top: 0;
 }
 
@@ -23,30 +19,60 @@ p {
 }
 
 
-
-.accent-color{
-    color: #FFE600;
-}
-
 a{
     color: #FFE600;
 }
 
-a:hover,
-a:focus {
-    color:#807300
+/* Layout */
+
+header, 
+section {
+    padding: 50px;
 }
 
-.button {
+header {
     background-color: #FFE600;
-    color: black;
+    color: #000;
+}
+
+.section-one {
+    background-color: #000;
+    color: white;
+}
+
+.section-two-link {
+    color: #000;
+    font-weight: bold;
+}
+
+/* Button Styles */
+
+.btn {
     display: inline-block;
-    margin-right: 25px;
-    padding: 15px 30px;
+    padding: 12px 25px;
+    font-weight: bold;
     text-decoration: none;
 }
 
-.links {
-    margin-top: 0;
-    margin-bottom: 0;
-} 
+.btn-primary {
+    background-color: #FFE600;
+    color: #000;
+}
+
+.btn-primary:focus,
+.btn-primary:hover {
+    background-color: #fff;
+
+}
+
+.btn-secondary {
+    background-color: #000;
+    color: #FFE600;
+}
+
+.btn-secondary:focus,
+.btn-secondary:hover {
+    background-color: #FFE600;
+    color: #000;
+    
+}

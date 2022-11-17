@@ -1,0 +1,71 @@
+Margin and Padding: When and why:
+---------------------------------
+- by default, margin above and below all of the text related elements is pretty much the font-size
+
+
+Collapsing Margins:
+-------------------
+- by default, margins collapse into one another(merge), meaning they overlap eachother
+- e.g. if one element is on top of another element, the element with the bigger margin(on the side they have in common) will be the value of the margin between them
+- margins will collapse any time they touch eachother, this includes a first elements mrgtop with its parents mrgtop
+- adding padding to the parent prevents it from merging margins with its first child
+
+Consistent Margins:
+-------------------
+- turn off the margin-top on typography related elements for consistency, use padding on the parent to know the exact spacing
+- margins don't collapse with flexbox and grid layouts
+
+
+Inline and Block behaivour:
+---------------------------
+- block: - default new line of conetent, stacking on top of eachother (p, h1-6, ul/ol, li, dib, header, footer, main, section etc.)
+ 	 - default width of 100%, default height of 0 - grow to the content inside of them
+- inline:- stay within flow of what's around them (links, strong, em, span, images(kinda))
+	 - can only nest other inline elements in them (link inside a strong element)
+	 - only respect margin, padding, and borders which are placed on the left or right side, not top and bottom (sorta) 
+	 - cannot set width or height
+	 - you actually can set padding top or bottom, but other elements ignore it (can cause overlapping)
+
+	
+
+Span Element:
+-------------
+- used to style text, but no default styling and no semantic meaning
+- usually use a class to target it with css
+
+
+Styling Links:
+--------------
+- links have different 'states' that can be styled: link(default), visited, focus, hover, active(in this order)
+- we can target these different states by using pseudo-classes: eg.  a:link, a:visited, a:focus.. etc
+- focus: when keyboard hovering, hover: when mouse hovering, active: when actively clicked(as long as held) 
+- order of these states matter(order above)
+- if you just set the a element without a pseudo class, it sets all of the states. Then specify focus and hover if needed (and maybe active)
+- links should be VERY obvious, we can achieve this through color and/or underlining (text decoration default)
+- never forget to include the :focus state, can select hover and focus at the same time and style them together (usually done this way)
+
+
+Inline Block:
+-------------
+- display: inline-block
+- stays inline but can set margin and padding on 
+- most common usecase, buttons
+- left & right padding should be > than top & bottom to make it look balanced (1:2 or 1:2.5 ratio is decent, not set in stone)
+
+
+Styling Buttons Tips:
+---------------------
+- this is for styling links that look like buttons, rather than a submit button - but most of these tips apply
+- put 'button' class directly on link (or the button if its an actual button element), instead of parent of link > prevents unclickable padding
+- use padding to create size of the button, not width and height > avoids uncentered text as well as problems with different text lenghts
+
+
+
+Useful Code:
+------------
+margin: 0 auto;			->centers div
+a:link: ...;			-> pseudo-classes, selects different states of links
+
+Selectors:
+----------			
+class1, class2 {...}		-> selects multiple classes
