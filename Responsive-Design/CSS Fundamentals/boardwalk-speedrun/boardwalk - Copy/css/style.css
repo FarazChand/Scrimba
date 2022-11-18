@@ -1,0 +1,90 @@
+body {
+    font-family: 'Lato', sans-serif;
+    color: #2e354f;
+    font-size: 18px;
+    margin:0;
+}
+
+img {
+    display: block;
+    width: 100%;
+}
+
+/* Typography */
+
+h1,
+h2,
+strong {
+    font-weight: 900;
+}
+
+h1 {
+   font-size: 36px;
+   margin: 0;
+}
+
+h2 {
+    margin-top: 0;
+    font-size: 24px;
+    color:#ef5839;
+}
+
+/* Links */
+a {
+    color: #ef5839;
+}
+
+a:focus,
+a:hover {
+    color: #efc439;
+}
+
+/* Buttons */
+
+.btn {
+    display: inline-block;
+    padding: 10px 25px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background-color: #ef5839;
+    color: #fff;
+}
+
+.btn-primary:focus,
+.btn-primary:hover {
+    background-color: #fff;
+    color: #ef5839;
+}
+
+.btn-secondary {
+    background-color: #fff;
+    color: #2e354f;
+}
+
+.btn-secondary:focus,
+.btn-secondary:hover {
+    background-color: #efc439;
+    color: #fff;
+}
+
+/* Layout */
+
+header,
+section {
+    padding: 45px;
+}
+
+header,
+.section-two {
+    background-color: #2e354f;
+    color: #fff;
+}
+
+.container {
+    width: 620px;
+    margin: 0 auto;
+}
+
