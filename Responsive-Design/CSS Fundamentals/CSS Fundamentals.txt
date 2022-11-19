@@ -5,7 +5,7 @@ Margin and Padding: When and why:
 
 Collapsing Margins:
 -------------------
-- by default, margins collapse into one another(merge), meaning they overlap eachother
+- by default, margins collapse into one another(merge)
 - e.g. if one element is on top of another element, the element with the bigger margin(on the side they have in common) will be the value of the margin between them
 - margins will collapse any time they touch eachother, this includes a first elements mrgtop with its parents mrgtop
 - adding padding to the parent prevents it from merging margins with its first child
@@ -18,7 +18,7 @@ Consistent Margins:
 
 Inline and Block behaivour:
 ---------------------------
-- block: - default new line of conetent, stacking on top of eachother (p, h1-6, ul/ol, li, dib, header, footer, main, section etc.)
+- block: - default new line of conetent, stacking on top of eachother (p, h1-6, ul/ol, li, div, header, footer, main, section etc.)
  	 - default width of 100%, default height of 0 - grow to the content inside of them
 - inline:- stay within flow of what's around them (links, strong, em, span, images(kinda))
 	 - can only nest other inline elements in them (link inside a strong element)
@@ -27,7 +27,6 @@ Inline and Block behaivour:
 	 - you actually can set padding top or bottom, but other elements ignore it (can cause overlapping)
 
 	
-
 Span Element:
 -------------
 - used to style text, but no default styling and no semantic meaning
@@ -36,7 +35,7 @@ Span Element:
 
 Styling Links:
 --------------
-- links have different 'states' that can be styled: link(default), visited, focus, hover, active(in this order)
+- links have different 'states' that can be styled: link(default), visited, focus, hover, active(style in this order to avoid problems)
 - we can target these different states by using pseudo-classes: eg.  a:link, a:visited, a:focus.. etc
 - focus: when keyboard hovering, hover: when mouse hovering, active: when actively clicked(as long as held) 
 - order of these states matter(order above)
@@ -60,12 +59,133 @@ Styling Buttons Tips:
 - use padding to create size of the button, not width and height > avoids uncentered text as well as problems with different text lenghts
 
 
+Specificity:
+------------
+- about how specific our selectors are
+- more specific = higher priority
+- lowest to highest(so far: Element selector, class selector, id selector
+- if an element has multiple selectors with the same properties defined differently, the selector with the highest priority will be the one that has its properties applied (regardless of order?)
+- if two or more selectors have the same level of specificity, the last one that appears will win
+- element = 1, class = 10, id = 100
+
+General Approach:
+-----------------
+- general rules get put in the element selectors (h1-h6, p, generel links) - want specificity low so we can overwrite later if needed
+- everything else gets a class (divs, heading, sections)
+
+
+Compound Selectors:
+-------------------
+- more specific than normal element selectors
+- controversial, some people say to never use them
+- compound add the selectors specificity together, which can be very annoying to keep track of (some weird things also happen)
+- we can avoid this confusion by only selecting one class at a time - this way we only need to keep track of the order the selectors appear
+- in summaray, give everything a single class, avoid compound selectors - lets you think less about specificity
+
+
+A Better way to Name our CSS Classes:
+-------------------------------------
+- you can have as many classes on an element as you want, having more than one class can be a good idea
+- when you have multiple properties that repeat themselves in two or more elements, its a good idea to just create a new generic class for those elements(refactor)
+- you then put all the identical properties on that class, and insert that class in both elements in the html
+- this allows you to repeat your code less in your CSS, as well as making your CSS more readable and less bloated - and you can update multiple related elements at once this way as well
+
+- you can then have a modifier class that deals with the properties that are different between the simillar elements eg bg color and text color
+- note that using terms like 'accent' and 'primary' colors instead of using color names themself when naming modifier classes is a good idea
+- this is because if you decide to change the color scheme of your css down the road, you don't have to rename the classes to make sense- but you do if you named them after their color
+
+- in order to write multiple classes on an element, simple seperate them with a space in the attribute area of the tag:
+eg. <h1 class="class-one class-two">....
+
+Note:  a space in css selectors is a compound selector, in html attributes, its not the same.
+
+
+The font Properties:
+--------------------
+- font-family, font-size, font-weight, font-style 
+- text-align, text-decoration, text-transform
+- color, line-height
+
+
+Font-family:
+------------
+- used to set the font for a given selector
+- can just use the defaults if you wanted: sans-serif, serif, cursive, monospace, helvetica
+- set in the body selector
+Font stacks:
+- the font only works if the person viewing the site has that specific font installed on their PC, so we need backup fonts
+- this means we can add multiple fonts to this propery, it uses the first one in line, if the user doesn't have it - it moves on to the next
+- https://www.cssfontstack.com -> to find the font stack for the font you like
+
+
+Google Fonts:
+-------------
+- a website that allows you to link a variety of fonts, great for adding cool new and different fonts outside of whats available on your pc
+- this means that people don't need specific fonts on their pc, because google will have linked the font for them through the internet
+- this means that we know everyone will be seeing the same font
+- just go to the googlefont website, search for a font you like, add the styles you want(weight, italic), open the side tab
+- in the side tab you will the a link that you can put in the head of your html, and the property you need to put into your css body selector
+
+Note: 
+- fonts are one of the things that slow sites down the most 
+- this is because the fonts have to be downloaded before being able to be displayed (displays sans-serif/serif by default until downloaded)
+- if you pick a font with 5 different styles, its like downloading 5 different fonts. So the less the better
+- only include fonts and styles of the fonts that you are actually using to reduce download times
+
+
+Inheritance:
+------------
+- most text and type properties are inherited
+- we can set a font-family or a background color to a section, and it will apply to everything inside that section (unless specified after)
+- theres a way to make most properties have the ability to be inherited (giving the inherit value to a property; eg color:inherit)
+- some things like links and headings can be weird because the don't inherit certain properties (because they have some default properties instead)
+Overwriting Iheritance:
+- links already have a default style on them setting their color to blue, and their text decoration to underlne - these overwrite any property that would be inherited
+- links do inherit other properties like font-size and font-weight
+- have to explicitly overwrite the default properties of links if you want to change them
+- its the same thing with headings and font-weight
+
+
+Containers:
+-----------
+- containers are a very useful tool to wrap the content of a section
+- they allow you to give the content a width and margin that is seperate from its parent, allowing, for example, the parent to span the page, while the content only span the defined width
+- they are basically just a div with a class called "container", that is placed within a section, and has the sections content placed inside of it.
+- properties that are commonly set on the container selector are: width, margin (0 auto to center)
+- containers are very commonly used in modern design
+
+
+
+
+Useful HTML tips:
+-----------------
+-
+- <Header> tag used for titles, navigation and logo and tells the webcrawler this
+- <h1> should only have one h1 per page, should be the title or main topic of the page
+- <section> works just like headers and divs, good practice to have a title for a sections(can even have a header)
+
+
+
+
 
 Useful Code:
 ------------
-margin: 0 auto;			->centers div
+margin:0 (on body)		-> removes margin on body, allows body to fit the page without any white borders (not the same as on * which is global reset) - doesn't affect text elements
+margin: 0 auto;			-> centers div
 a:link: ...;			-> pseudo-classes, selects different states of links
+a {..}, a:focus,a:hover {..}	-> easy way to style links with two selctors	
 
 Selectors:
 ----------			
 class1, class2 {...}		-> selects multiple classes
+
+
+
+How to order CSS:
+-----------------
+- general starting point (body stuff)
+- typography
+- layout
+
+Note: If you repeat yourself, create a new selector with the two(or more) elements you repeated a property with the same value, and write the rule there to keep it dry
+      This makes changing your css a lot faster if needed in the future.

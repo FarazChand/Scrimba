@@ -1,0 +1,158 @@
+We need to be able to get a design to work on any device/screen size, instead of just eing able to work on a single screen size.
+
+Basics of Responsiveness:
+-------------------------
+This section covers:
+- how to approach a layout
+- css units
+- flexbox basics
+- media query basics
+
+
+CSS Units:
+----------
+There are three main types of units: absolute, percentages and relative.
+
+Absolute units: 
+- px, pt, cm, mm, in, etc
+
+Percentages:
+- mainly used for widths
+- relative to their parent (except on height, weird - not set very often)
+
+Relative units:
+- two types of relative units
+- relative to font-size - used the most often (focus of this section): em and rem (there are more uncommon ones)
+- relative to viewport (the browser window) - used in special cases: vw, vh, vmin, vmax
+
+
+
+
+Percentages:
+************
+- a lot of math involved when thinking responsivley using pixels, theres a much easier way to deal with this
+- when using a pixels to set a width on a container, things work fine on big screens - but cause side scrolling when reducing the screen size
+- this is because the content is wider than the content width, not responsive
+
+The fix?
+- we can fix this by changing the width from being set in pixels, to being set in a percentage
+- with a width on a container set as a percentage, as you grow or shrink your screen, the container will adjust itself automatically
+- what ever percentage you set it to, it will be the percentage of its parent element
+- e.g. 50% on a container, will be 50% of the parents size that it resides in (if the parent is 500px, the container will be 50% of that)
+- block level elements (header, section, divs) have a width of 100% by default (unless you set a width)
+- remember always, when using a percentage, that percentage is always relative to its parent - a lot of the time, the parent is defaulting to 100%
+
+
+Controlling the Width of Images:
+--------------------------------
+- even when you set your containers width to a percentage, if there is an image inside of it - the image can still stick out the side of it
+- images are weird like that, they are inline, they flow with text - they default to the size of themselves, which can sometimes be bigger than desired
+- we can fix this by setting its display to block and then make its width a percentage of its container
+
+Note:
+- do not set the width AND the height to an image, it will distort it - messes up the dimensions. Only use one or the other(usually width)
+
+
+Min-width and Max-width:
+------------------------
+- setting the width of a container to a percentage is great, but it does bring up a problem on bigger screens
+- if we set our container width to 90%, it looks great on mobile, however, when we get to bigger screens...
+- even though it still works, it doesn't look great because our text is spanning accross 90% of the screen.
+- once again, this looks fine on mobile and smaller screens, but when you get to larger screens, it just looks weird
+
+The fix?
+- we keep the width at 90%, but we add a max-width (can be what ever size that makes sense)
+- this allows the container to still be responsive while the screen shrinks to mobile sizes 
+- at the same time, this also allows the container to stop growing too large when the screen grows to bigger desktop sizes 
+- so our text and line lengths will look great even on desktop screens :D
+- this is a very common property on containers, the actual size depends on what you are building
+
+Notes:
+- min and max width are their own property. This means that an element can have values set for its width, min width and max width at the same time
+- this means you can set them in any order in your css, they are seperate properties!
+
+
+
+Relative Units:
+***************
+- called relative units because they are relative to something else, either the font-size or the viewport size
+- we will focus on em and rem in this section
+- em and rem are relative to the font-size of other elements (their parent in ems case, html in rems case)
+- font-size is an inherited property, if it isn't declared anywhere - the default will be the body's font-size (normally 16px)
+
+em:
+---
+- 1em = default font-size of parent, 1.5em = 150% font-size of the parent
+- if the parent doesn't have a font-size on it, it will look up through its ancestors to see if it can find a font-size, all the way untill the body (which gets it from the html root)
+- if the body's font-size changes, everything that is set with an em as a size will change as well (unless they have a closer parent with a set font-size, in which case it would adjust to the closest parent's font-size)
+- this can be very useful, but it can also cause major problems
+
+note:
+- if em is used on padding, it is relative to the font-size of the element it belongs to, instead of to the parent
+- very important to understand this :D
+- it actually works this way with any property that isn't font-size, seems to be the most useful with padding though
+
+
+The Problem with em:
+--------------------
+- when used for the font-size of an element, the em unit can create a cascading effect
+- parent->child->grandchild... 16px -> 2em(32px) -> 2em(64px)
+- if an element's font-size is defined in em, it takes its parents font-size and then multiplies it by the em value - the result being the size in pixels
+- if that same element has a child that has a font size defined in em as well, it will take the original elements new calculated font-size and apply its own em multiplier on it in order to calculate its own font-size
+- this causes an unintended(for the most part) cascading effect that can confuse people if not used properly, best to avoid setting font-sizes in em (unless it makes sense)
+- the em is still a very useful unit for responsiveness, and it has its use cases, just not for font-size specifically
+
+
+The Solution: rem:
+------------------
+- short for root em
+- always relative to the root of our document (root of an html page is always the html element)
+- so the font-size of our html element is what dictates the effect of the rem
+- remember that the default font-size of the root is usually 16px, we can change this through the html font-size property to what ever font-size we want
+- we can also define a different element, like a header, with a font-size in rem
+- the rem takes the font-size of the root and multiplies it by the rem value (1 rem = 100%, 1.5rem = 150%)
+- so if the root font-size is 16px, and we have a header font-size of 2 rem, and a section font-size of 3 rem, header = 32px, section = 48px.
+- we can also change the root font-size, and the elements set in rem will change their font-size accordingly (kinda like ems, but not relative to parents)
+- so if we have a whole page of elements set in rem, and we want them to appear bigger or smaller collectivley, we can just change the root element, and all of the elements font-size would change with it
+- very useful when setting media queries, allows us to not have to go through all of our code and change multiple values
+
+Note:
+- you can change the html font-size to 62.5% to have 1 rem = 10px, makes things easier - however keving powell prefers to not change this property
+
+
+Styling buttons with em and rem:
+--------------------------------
+- this is a great way to illustrate the different use cases of em an rem
+- if you change a buttons font-size to rem, and also increase/decrease the size - you will see the font-size change - however the padding will stay the same (since it's set in px)
+- we want the padding of our element to scale with it's font-size, so we set the padding in em
+- now, when our font-size grows or shrinks, the padding on the button will grow and shrink with it!
+- this is the effect we most likely want to have in most situations when we want to change the font-size of an element
+- also, by setting everything using these units, we can easily scale the whole pages font-size and padding by just changing the html element's font-size
+
+
+How to decide which unit to use:
+--------------------------------
+- a lot of the old disadvantages of pixels don't exist anymore, you can get away with using pixels for a lot of things now days.
+- this is because of the reference pixel - makes pixels look the same on all resolutions
+
+However, there are advantages to using em and rem. General rule of thumb:
+- font-size = rem (avoid cascading effects of em)
+- padding and margin = em (scales padding and margin with own elements font-size)
+- width = em or pixels(set size) or percentage
+
+Rule of thumb not set in stone, some units might be better outside of this framework
+
+
+
+
+The Basics of Flexbox:
+----------------------
+- by default, elements are usually display block or inline
+- block elements stack on top of eachother (div, header, footer, main, h1->h6, p, etc.)
+- inline elements stay within the flow of what's around them(a, strong, em, span)
+
+We can change this behaviour by changing the display property to flex on the parent element, this changes the behaviour of all it's direct children
+- changes the children from stacking vertically to being columns horizontally
+- the children no longer have a width of 100%, they shrink to fit the content that is inside of them on the horizontal axis 
+
+

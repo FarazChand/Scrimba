@@ -1,0 +1,69 @@
+body {
+    font-family: 'Lato', sans-serif;
+    color:#2E354F;
+    margin: 0;
+    font-size: 18px;
+}
+
+img {
+    display: block;
+    width: 100%;
+}
+
+/* Typography */
+
+h1,
+h2,
+strong {
+    font-weight: 900;
+}
+
+h1 {
+    font-weight: 36px;
+    margin: 0;
+}
+
+h2 {
+    color: #ef5839;
+    margin-top: 0;
+}
+
+/* links */
+
+a {
+    color: #ef5839;
+}
+
+a:focus,
+a:hover {
+    color: #c2b82d;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 10px 25px;
+    font-weight: 700;
+    text-decoration: none;
+    background-color: #ef5839;
+    color: #fff;
+}
+
+/* Layout */
+
+header,
+section {
+    padding: 45px 0;
+}
+
+header,
+.section-two {
+    background-color: #2E354F;
+    color: #fff;
+}
+
+.container {
+    width: 620px;
+    margin: 0 auto;
+}
+

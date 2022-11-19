@@ -3,7 +3,7 @@
 
 body {
     margin:0;
-    font-family: Garamond,Baskerville,Baskerville Old Face,Hoefler Text,Times New Roman,serif; 
+    font-family: 'Montserrat', sans-serif;
 }
 
 /* Typography */
@@ -22,6 +22,7 @@ p {
 
 a{
     color: #FFE600;
+    font-weight: 800;
 }
 
 /* Layout */
@@ -43,7 +44,6 @@ header {
 
 .section-two-link {
     color: #000;
-    font-weight: bold;
 }
 
 /* Button Styles */
