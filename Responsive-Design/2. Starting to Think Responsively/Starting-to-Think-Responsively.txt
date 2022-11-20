@@ -146,7 +146,7 @@ Rule of thumb not set in stone, some units might be better outside of this frame
 
 
 The Basics of Flexbox:
-----------------------
+**********************
 - by default, elements are usually display block or inline
 - block elements stack on top of eachother (div, header, footer, main, h1->h6, p, etc.)
 - inline elements stay within the flow of what's around them(a, strong, em, span)
@@ -155,4 +155,122 @@ We can change this behaviour by changing the display property to flex on the par
 - changes the children from stacking vertically to being columns horizontally
 - the children no longer have a width of 100%, they shrink to fit the content that is inside of them on the horizontal axis 
 
+We can give the children a width using percentage, helps with responsiveness - though we should be aware of how much of the parent the children are spanning:
+- if the widths of the children add up to 100%, there will be no space in between (eg 25% 25% 50%), making them look cramped
+- to fix this, we can make them add up to a lower percentage (80 - 95%, or what ever makes sense in your situation)
+- this leaves us with some space, however, we still have to tell the parent how to distribute this space - which is where our next property comes in
 
+Note:
+- lets say there are three columns, if we give 2 of the columns 25% and let the other one fill in the space, we would expect it to fill in the remaining 50%, right?
+- however, this doesn't happen for some reason. We have to explicitly set ALL of the columns with a %, otherwise weird stuff starts to happen
+
+
+Flexbox: Justify-content:
+-------------------------
+- we can use this property to determine how the leftover space within the parent is distributed betweeen the children on the main(horizontal) axis
+- there are three main values of this property that we use: space-between, space-around, space evenly
+
+Space-between: 
+- takes the space and places it between the children, leaving none on the outside perimeter
+Space-around: 
+- does the same as above, but also puts space on the perimeter, however, because of the way it is distributed between the items, the items will appear to have more space than the perimeter (weird, don't use usually)
+- this happens because it is evenly distributing the space on each side of each child, but if two items are next to eachother, they will both have their own space added on their adjacent side
+- this effectively doubles the space compared to the perimeter
+Space-evenly:
+- actually makes all the space between items AND the perimeter, EVEN. So all spaces visually appear even, unlike space-around 
+
+
+Flexbox: Align-items:
+---------------------
+- allows us to control our items on the vertical(cross) axis
+- when a parent display is changed to flex, all of its items turn into columns, the height of these columns is determined by the column that's content is stretching it the most (the tallest column)
+- this is great because its very hard to match heights of different items without flexbox, this makes it easy
+- however, sometimes we don't want this to happen. 
+- there are different values for the align-items property that can help us achieve a different result
+
+flex-start:
+- used if we want things to align to the top (used the most often)
+center:
+- if we want to vertically center items
+flex-end:
+-if we want to align items to the bottom
+stretch(default)
+- stretches items to the height of the tallest item, enabled by default
+baseline:
+- will learn more about this later, but essentially deals with the text within the items ( a little weird )
+- lines up the bottoms of the first line of text in every item, regardless of the difference in font-size( not use very often )
+
+Note:
+- any block level element has a default height of 0, but grows to fit the content inside of them	
+
+
+Flexbox: Flex-direction:
+------------------------
+- display: flex - creates columns within the element it applied to
+- flex-direction: row - the default behavior for this property, means that the parent is a row of columns
+- flex-direction: column - switches the axis, meanst that the parent is a column of rows
+
+Important to understand that we are switching the main-axis, so we are keeping all the same flexbox features, but we are doing it on the cross axis.
+- this means that justify-content and align-items also switch there axis of operation
+
+
+
+Media Queries:
+**************
+- media queries let us add new styles that target only specific conditions 
+
+basic syntax: 
+@media () {...}	
+@media media-type and (media-features) {...}
+
+
+The media-type lets us target different types of media: 
+- screen (@media screen {})
+- print (@media print {})
+- speech (@media speech {})
+
+The media condition lets us target specific conditions within that media type:
+- widths (@media (min-width: 600px){})
+- orientation(@media (orientation:landscape){})
+- specific features (@media (hover) {})
+
+Both media-types and conditions are optional, we do need to have at least one or the other though:
+
+e.g. targeting only screens: @media screens {...}
+e.g. only a condition, width of the viewport: @media (width: 960px) {...}
+
+
+Note:
+- if you don't include a media-type, and you only include the condition, the media-type defaults to a type of "all"
+- you can combine a type with a condition by using the 'and' keyword
+	e.g. @media screen and (min-width: 600px) {...}
+- you can also combined two conditions as well using the 'and' keyword
+- you might see the 'only' keyword sometimes, but thats for old web dev, not used anymore
+- for now we are focused on min-width and max-width
+- you have to nest your selectors within the media query, then write the css as usual. What ever is inside the query will be applied at the specified condition for the specified media-type (all by default if not explicitly specified)
+- you can have multiple media queries, but the order of them matter, they can overwrite eachother unintentionally if written in the wrong order. (the most recent one to appear will win, just like most things in css)
+
+Min and max width are pretty commonly used conditions for media queries.
+- just think of it like this, min-width means: starting from the specified width and beyond, the condition is applied (at the minimum width of ... do this)
+- max width means: everything up to the specified width, and not past it, the condition is applied (up until the max width of ... do this)
+
+Note that landscape is something that is wider than it is tall, and portrait is the opposite. We can apply media queries on the change of these orientations. Helps with tablets and phones
+
+Some people like writing media queires right below the selectors they are changing specifically (more organized, yet more bloated)
+Some people like writing all of the media queries at the very bottom of the css file (all in one place, no problems with order - however, less organized in a sense) 
+
+
+
+
+Creating a Navigation:
+***************
+- flexbox is very useful when stying a navigation
+- traditionally marked up using an unordered list, which is placed inside a nav element, which tells the site that this is the main navagation
+- the reason it is traditionally done in a UL is mainly for accessability issues and for the fact that it is a list of the pages on our site
+- most sites do it the traditional way - which is the more complicated way to do it, so if we understand how to do it this way, it is much easier to do it the other less common way
+
+General notes:
+- don't change the width on the body, can cause problems if people want to add a section later - instead add a container wrapper and change its width 
+- you can use containers within sections (to give the background full width of the screen)
+- you can also wrap every peice of content including the header and sections within a container (if we don't care about the background like we do above)
+- giving your img a max-width of 100% instead of just a width of 100% ensure that it doesn't grow past its original size (which prevents blurryness)

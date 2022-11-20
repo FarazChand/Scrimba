@@ -1,0 +1,52 @@
+1. The first thing we do is plan our html out based on the desktop layout:
+- we know that all of our content is in centered in the middle of the page at a capped width, so we wrap all the content in a container
+- within this container, we know we have 4 main elements:
+	- the h1
+	- the img
+	- the first column container
+	- the second column container
+	- NOTE: this can be 3 elements if your h1 and img are in a header
+
+
+We then just logically fill in the h2s and ps where they should be, and add classes to the elements that will need them:
+- the h1 and img don't need any modifiation or classes.
+- the column containers both need to change their display, so we give them both the same class (columns) 
+- we then have to distinguish the columns from eachother, and give them classes accordingly:
+	-> we first understand that the layout is a 4 column layout, with the small columns taking 25% of space each, and the other columns taking the remaining space (do the math for each container)
+	-> we give the small columns a specific class (col-1)
+	-> also the columns with background color, we give those a specific class (col-bg)
+	-> note that columns can have multiple classes, and the columns with backgrounds will have all 3 classes (col, col-1, and col-bg)
+	-> the unique column in the first container has its own width, so does the unique in the second. They both get their own class (col-2 and col-3) 
+
+	
+2. Styling:
+
+* we start styling from general styles, then to typography, then to layout. However, we can focus on our container first in order to make everything easier to visualize
+
+
+- styling the container:
+	-> set the container's max-width to the given design specifications
+	-> set the actual width to 90% to make it look good on mobile
+	-> center using margin: 0 auto
+
+
+- the first thing we notice is that our image is too big, getting in our way.. lets deal with it:
+	-> we must make the image match the given designs size as best as we can
+	-> we do this by giving the image a max width of 100% (prevents it from over sizing and becoming blurry)
+	-> we then give it a width of 100% (to span the whole container) 
+	-> we then give it a height that matches our given design (about 200px), this also stretches and distorts the image
+	-> we fix the distortion by using the object fit: cover property, works but the image isn't centered how we want
+	-> we center the image by using the object position: 50% 60% (numbers based on how we want it, changes from design to design)
+	-> image done, looks great
+
+* now that the elephant in the room has been addressed, we can focus on doing things in the usual order, so general styles first:
+
+- body:
+	-> set the color, font size and background color to the given design's specifications
+	-> set the margin to 0 to remove the extra whitespace (in this design, not that important, but it's good practise)
+
+-img is already dealt with
+
+* moving on to typography:
+
+
