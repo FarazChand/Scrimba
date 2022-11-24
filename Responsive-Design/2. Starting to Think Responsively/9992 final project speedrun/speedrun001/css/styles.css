@@ -188,16 +188,28 @@ article {
     padding-bottom: 2em;
 }
 
+.article-image {
+    height: 14em;
+    width: 100%;
+    object-fit: cover;
+}
+
+
+
+.article-featured-image {
+    height: 14.5em;
+    object-position: 50% 100%;
+}
+
 .article-image,
 .article-info {
     order: -1;
 }
 
-
-
 .article-recent-secondary {
     order: -1;
 }
+
 /* aside */
 
 .aside-widget {
