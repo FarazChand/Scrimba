@@ -1,0 +1,25 @@
+body 		1.125rem	1		1 = ubuntu, 2 = Lora
+
+
+Header		2rem		2
+sub heading 	.75rem		1
+nav link	1rem		1
+
+article title 	1.5rem		2
+read more	.875rem		1
+artice info	.875rem		1
+
+widget title	1.125rem	1
+widget body	.875rem		1
+recent w title	1.125rem	2
+
+
+
+
+The images all seem to have a fixed height throughout the design, the heights in the mobile version are equal to the desktop version
+The body is 1.125rem, which is 18px. When calculating image height in em, this should be kept in mind, or just do it in px.
+
+Featured article image		308px 	17.1em  (all aproximate, not round numbers)
+Recent article image		242px	13.4em
+About me widget image		133px	7.4em
+Aside recent post image		87px	4.8rem

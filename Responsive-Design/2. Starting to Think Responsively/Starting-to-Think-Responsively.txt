@@ -163,6 +163,7 @@ We can give the children a width using percentage, helps with responsiveness - t
 Note:
 - lets say there are three columns, if we give 2 of the columns 25% and let the other one fill in the space, we would expect it to fill in the remaining 50%, right?
 - however, this doesn't happen for some reason. We have to explicitly set ALL of the columns with a %, otherwise weird stuff starts to happen
+- this is because, since the width isnt specified for the one of the items, flexbox is trying to make that item 100%, so it shrinks the other item (weird af Ik)
 
 
 Flexbox: Justify-content:
@@ -179,6 +180,8 @@ Space-around:
 Space-evenly:
 - actually makes all the space between items AND the perimeter, EVEN. So all spaces visually appear even, unlike space-around 
 
+- we can also determine how our content is oriented (just like align-items below) by giving the property a value of one of these values: center, flex-start, flex end
+- look below for more info
 
 Flexbox: Align-items:
 ---------------------
@@ -268,9 +271,98 @@ Creating a Navigation:
 - traditionally marked up using an unordered list, which is placed inside a nav element, which tells the site that this is the main navagation
 - the reason it is traditionally done in a UL is mainly for accessability issues and for the fact that it is a list of the pages on our site
 - most sites do it the traditional way - which is the more complicated way to do it, so if we understand how to do it this way, it is much easier to do it the other less common way
+- nav>ul>li>a - this is the lineage of how navs work 
+- adding padding to a link makes it easier to click on in general, adding padding to the li does not have this same affect
+- some developers show what page you are on (current-page), and have a class added to the link in the navigation that represents that page - the class is styled to stand out to show what page you are on
+
+
+
+Project Planning:
+*****************
+
+Markup:
+- we want to build the css mobile first, but we always want to build the html desktop first (more complicated layout)
+- we look at the desktop design and break it up into its biggest components (header(nav), main-content, aside, footer.. etc)
+- then we break those components into their smaller components, and so on and so forth until we have all of our components laid out
+- while doing this, we are thinking about what needs to be grouped together and how in order to get the layout the way we need it
+- we are pretty much planning the whole project and laying a foundation and map for the rest of the project, make sure its done right
+
+There are a few semantic elements we should be aware of:
+- header: 
+	->where our title and navigation usually go
+- main: 
+	->where the main content of our page is usually located, the focus of the current page. 
+	->Can only have one main per page
+	->can affect the accessability experience of the people visiting your website - one of the important elements for assistive technologies(as are the rest of these honestly)
+	->some older browsers can't use main, so you have to set the role to main in order for it to work -> <main role='main'></main>
+- aside: 
+	->where a side bar or some secondary content might go  
+	->can fill in different roles depending on the context its being used in
+	->possible to have multiple aside elements per page
+- footer: 
+	->where other information might go, sometimes a nav goes here as well
+- article:
+	->used for articles
+	->self contained element
+	->if we put something like an h2 inside of an artice, we know that it is the heading for the article, related to it
+	->screen readers read the html in the order its formatted in, so first come first read.
+		-> knowing this, we should always write our html in the most logical way, thinking about allowing the consumer to understand the content as much as possilbe
+		-> this means that even if its not supposed to appear that way by design, its best practise to at least write the html in the logical order 
+		-> this can be fixed visually later with a flex box feature that doesn't effect the order of the markup
+		-> logical order is something like : h2s first, img, ps, then a's
+
+Note that all of these elements can either have containers or even be in a container themselves - it depends on the layout of your page, but they can exist within containers too (didn't know this was correct to do).
+
+Naming your elements:
+- be as descriptive as possible without creating an enormous name
+- keep elements contained the same parent with a similar naming pattern, for exampe, if you have an article with a bunch of items: article-title, article-image, article-info, article-body, article-read-more
+	-> notice that we write the common part of the name first, this makes reading our css much easier
+- some elements might be structured differently, and therefor have to be named differently - however, some of their items might be identical in terms of properties. You can give those identical items the same class.
+
+
+CSS:
+----
+Start with typography first, then big picture layout (big sections), then move on to the innerworkings of each of those bigger sections.
+-> we start with typography because if you start with layout, then change your type, you might need to change your layout again depending on how your type changes things. If we start with type, this doesn't happen.
+-> for spacing, we like choosing one direction (margin bottom usually), however, not always - it just makes things easier, but there are exceptions
+-> always start with a larger margin than you need, then shrink down to what looks good (your brain plays tricks on you if you do it the opposite way)
+
+Changing the visual order of elements with flexbox:
+- the parent needs to have its display set to flex
+- we actually can set the order with the child's properties
+- we do this using the order property (order:1, order:2)
+- the lower the property, the sooner it appears visually
+- two items with an equal order number (1 = 1) will appear in the order that they are set to in the markup
+- helps keep the logical order of the markup, while letting us play around with the visual order (helps people who need assistive tools to consume our content while still being visually appealing to those who don't)
+- test short titles and long titles to make sure they both work with your design (eg. negative margins overlapping)
+- :last-child psuedo class is useful, if the element is the last child of its type
+
+
+
+
+Viewport Meta Tag:
+******************
+- some websites are not optimized for mobile use - so devices with small screens will by default render a zoomed out version of the page andthen shrink it down to fit their viewport - in order to counter act that possibility.
+- even if you have put in the work to make your site responsive, it will still appear this way unless you explicitly tell it not to, we do this throught adding a specific meta tag to the head of our documents
+- lots of different attributes we can add but the basic meta tag will look like this:
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+- can be added anywhere in the head of our document
+- ensures that the web page loads as intended on mobile and smaller screens
 
 General notes:
 - don't change the width on the body, can cause problems if people want to add a section later - instead add a container wrapper and change its width 
 - you can use containers within sections (to give the background full width of the screen)
 - you can also wrap every peice of content including the header and sections within a container (if we don't care about the background like we do above)
 - giving your img a max-width of 100% instead of just a width of 100% ensure that it doesn't grow past its original size (which prevents blurryness)
+- img should have a display block on them along with the max width as well - leaving it inline causes weird spacing issues(not explained in video, just told to do this)
+- can also apply a height to an image, but this causes stretching - use object-fit: cover to get rid of this (crops to fit) then object-position: (insert percentages eg. 50% 60%) to position it correctly
+- if you are setting a height on an image, its usually better to set a min-height to allow it to get bigger if it needs to, but not shrink past a certain point
+- adobe xd is a pretty cool design tool
+- remember than in flexbox, margins don't collapse (so you might expect them to colapse somewhere, but the margin looks bigger than it should be - probably because its parent is a flexbox and the margins havent collapsed
+
+- negative margins can create overlap, they can be used as a tool to make creative styles - but it takes strategy and experience - stay away from using these in general - unless specifically experimenting with a new design 
+- we set the aside to 25% and to have a min width of 200px - because when we were shrinking the viewport, the sidebars content was getting too squished. We then added margin to the left so it didnt touch the main content
+- breakpoints are not device specific, they are layout specific - we add them when our layout starts to break
+
+- for other pages (like recent-posts), our css is usually going to be identical, so we can reuse our main html because all of the classes will be the same. The only thing that will be different is the actual content
+- in the case for the project, we only had to change our featured article to be styled as a recent article

@@ -1,0 +1,277 @@
+/*  Fonts
+-----
+font-family: 'Lora', serif;
+font-family: 'Ubuntu', sans-serif;
+*/
+
+body {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 300;
+    font-size: 1.125rem;
+    color: #707070;
+    margin: 0;
+    line-height: 1.5;
+}
+
+img {
+    display: block;
+    width: 100%;
+}
+
+/*************** 
+    Typography
+****************/
+
+h1 {
+    font-size: 2rem;
+    font-family: 'Lora', serif;
+}
+
+h1, 
+h2, 
+h3 {
+    margin: 0;
+    font-weight: 400;
+    color: #143774;
+}
+
+.subtitle,
+.artice-read-more {
+    color: #1792D2;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin-top: 0;
+}
+
+.subtitle {
+    margin-top: 0;
+    font-size: .75rem;
+    color: #1792D2;
+}
+
+.article-title {
+    font-family: 'Lora', serif;
+}
+
+.article-info,
+.article-read-more {
+    font-size: 0.875rem;
+}
+
+.article-read-more {
+    text-transform: uppercase;
+    color: #1792D2;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+}
+
+.widget-title,
+.recent-widget-title {
+    font-size: 1.125rem;
+}
+
+.widget-title {
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 2.5em;
+}
+
+.widget-body {
+    font-size: 0.875rem;
+}
+
+.recent-widget-title {
+    font-family: 'Lora', serif;
+    /* margin-bottom: 1em; */
+}
+
+
+/*************** 
+    Layout
+****************/
+
+header {
+    background-color: #f8f8f8;
+    padding: 2em 0;
+    text-align: center;
+    margin-bottom: 3em;
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.container-flex {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Navigation */
+
+.title-container {
+    margin-bottom: 2em;
+}
+
+.nav-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.nav-list-item {
+    margin-bottom: 1rem;
+}
+
+a {
+    color: #707070;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    text-decoration: none;
+}
+
+a:focus,
+a:hover {
+    color: #1792D2;
+}
+
+@media (min-width:675px) {
+    header {
+        text-align: center;
+    }
+
+    .container-flex {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .container-nav {
+        align-items: center;
+    }
+
+    .title-container {
+        margin: 0;
+    }
+
+    .nav-list {
+        display: flex; 
+    }
+
+    .nav-list-item {
+        margin-left: 2em;
+        margin-bottom: 0;
+    }
+}
+
+/* Articles */
+
+article {
+    display: flex;
+    flex-direction: column;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+.article-featured {
+    border-bottom: 1px #707070 solid;
+    padding-bottom: 2em;
+    margin-bottom: 2em;
+}
+
+.article-image {
+    height: 242px;
+    object-fit: cover;
+}
+
+.article-image-featured {
+    height: 308px;
+}
+
+.article-image,
+.article-info {
+    order: -1;
+}
+
+.article-read-more {
+    margin-bottom: 0;
+}
+
+
+.article-recent {
+    margin-bottom: 2em;
+}
+.article-recent-secondary {
+    order: -1;
+}
+
+@media (min-width:675px){
+    .article-recent {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .article-recent-main {
+        width: 70%;
+    }
+    
+    .article-recent-secondary {
+        width: 25%;
+       
+    }
+}
+
+/* Aside */
+
+aside {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.aside-widget {
+    border: 20px #f8f8f8 solid;
+    margin-bottom: 2em;
+    padding: 1.5em;
+}
+
+.recent-widget {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 3px #f8f8f8 solid;
+    margin-bottom: 1.5em;
+    padding-bottom: 1em;
+}
+
+.recent-widget:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+.recent-widget-image,
+.widget-image {
+    object-fit: cover;
+}
+
+.recent-widget-image {
+    height: 87px;
+    order: -1;
+    margin-bottom: 1.5em;
+}
+
+.widget-image {
+    height: 133px;
+}
+
+
+@media (min-width:675px) {
+    main {
+        width: 70%;
+    }
+
+    aside {
+        width: 25%;
+        min-width: 230px;
+    }
+}

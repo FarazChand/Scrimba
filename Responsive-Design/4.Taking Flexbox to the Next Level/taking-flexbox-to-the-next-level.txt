@@ -1,0 +1,204 @@
+Taking Flexbox to the Next Level
+---------------------------------
+---------------------------------
+
+
+
+Flex-Direction, Wrap and Flow
+==============================
+
+Flex-Direction:
+---------------
+- we know that using display flex on a container will make its items act like columns
+- using the flex-direction and setting it to column will make its items act like rows
+	-> basically sets it back to the default except that now we have access to the flexbox properties(powerful)
+	-> we also know that flexbox stops collapsing margins from happening (usually good)
+
+- another flex direction property is row-reverse 
+	-> items act like columns and reverses the items order (not really used but good to know)
+
+- also have column-reverse
+	-> which acts like columns but reverses the order (not really used but good to know)
+
+Notes:
+- remember that ACTUAL order and VISUAL order are different, acual order being more important always
+
+
+Flex-wrap:
+----------
+- a property of flex box, just like flex-direction
+- it has 2 values, nowrap and wrap
+- default value of nowrap, if we have too many items
+	-> they will shrink as small as they possible can
+	-> they will break out of the container once there is no more room
+	-> this can also cause side scrolling
+
+- wrap:
+	-> the widths do not shrink, (keep the size of their text or set widths) - unless absolutely necessary
+	-> access items that cannot fit in their container will wrap as soon as there is no room
+	-> this means going to the next row below (for columns) and going to the next column (for row)
+	-> this happens while the container itself shrinks as well, and when it grows, the items take up the new space (in the opposite way)
+
+
+Flex-Flow
+---------
+- another property of flexbox
+- a shorthand for flex-direction and flex-wrap being used together
+- can give it two values, the first specifying its direction and the second specifying its wrap
+- e.g.	flex-flow: row-reverse wrap;  -> will set the items with a flex-direction of row-reverse and a flex-wrap of wrap
+
+
+
+Justify-content, Align-Items
+============================
+
+Justify-content:
+----------------
+- works on the main axis (horizontal)
+- has a couple values: flex-start, flex-end, center, space-around, space-between, space-evenly 
+- flex-start(default)
+	-> lines up items from start to end
+	-> any space left is at the end
+
+-  flex-end 
+	-> lines up items from end to start
+	-> any space left is at the start
+
+- center
+	-> lines up items to center
+	-> all space equally divided on both left and right sides
+
+- space-around
+	-> takes all the empty space and puts an equal amount around each item
+	-> items have that space applied on each side, their left and their right
+	-> this means that the items on the borders will only have half the space on their side closest to the border when compared to all the other items
+	-> makes it look a little of on these sides ^
+
+- space-evenly
+	-> every side of each item has an equal amount of space, including the border sides
+	-> usually the effect we want over the space-around effect
+
+- space-between
+	-> every side of each item has an equal amount of space, but the border sides have no space at all
+
+- baseline
+	-> lines up the bottom of each first line of text in each item, regardless of the font-size (not used very often)
+
+Align-items:
+------------
+- works on the cross access (verical)
+- only works if the flex-container has a height set to it
+- has a couple values: stretch, flex-start, flex-end, center
+- stretch (default)
+	-> items stretch to fit the width of the container (either the container set height or the tallest item)
+	-> remember that the container height matches the height of the  tallest item, unless explicitly set otherwise
+
+- flex-start
+	-> lines items up at the top, items do not stretch (unless the item requires it for the content)
+
+- flex-end
+	-> lines up items at the bottom, items do not stretch ^^
+
+- center
+	-> lines up items at the center  vertically, items do not stretch ^^
+ 
+
+Notes:
+- we can set both align-items and justify-content to center, and it will center the items perfectly within their parent
+- changing the direction from row to column will change the axis that these properties work on
+
+
+
+Exploring Align-content
+=======================
+-> not noticable unless we have a big container with flex wrap on
+-> if this is not on, the items will stretch themselves so that they fit the container
+-> if it is set the flex-start
+	-> the items match eachothers height (height of the tallest item)
+	-> the content (all items) wrap when needed, and take up as much space as needed
+	-> any space left in the container will be left at the bottom of the container
+
+- center just distributes the space evenly top and bottom
+- end distributes the space all at the top
+- also has all the properties of justify content (but on the cross axis) like space between
+
+Align-content works on all of the rows of content, align-items on an individual row by row.
+
+
+
+Flex-Grow nad Flex-Shrink Explained
+====================================
+These are properties that we can put on the flex-items rather than on the container like we've been doing for the past properties
+
+Flex-grow
+---------
+- default is 0 (not growing passed content size), but can be set to any number (1,2, etc)
+- if the container size is small, the items all have the same size, once the container grows to a point that there is room to grow, they will grow.
+- when set on an item, that item will grow to fit the space that is available. (set a number like 1, etc)
+- can set multiple items in a container with a flex grow
+- if two or more items have a flex grow of 1, they will both grow at the same size with the space availabel
+- if one of them has a flex grow of 2, it will grow at double the size 
+
+Flex-shrink
+-----------
+- works in a way that is opposite of flex grow
+- the default flex-shrink value is set to 1 (no increase in shrink speed, normal shrink speed)
+- if set to 0, the item will not shrink at all, can cause overflow because it refuses to shrink
+- everything stays the same size at bigger container sizes, however when they start running out of room, items with flex-shrink set to > 2 will shrink faster than normal items
+
+Notes:
+- if a width is set on an item that is in a flex container, it will try to stretch to that size, but when the container starts to shrink and they run out of room, the items will also start to shrink as well
+
+
+
+Flex-basis
+==========
+- very misunderstood property
+- default is auto, if no width it defaults to the content that's inside
+- if you do have a width, flex-basis is looking at that width
+- can overwrite this by setting the size in the flex-basis value (eg -basis: 400px;) 
+- acts very similar to setting a width however there is a difference - its not working on the width
+- its actually working on the main axis
+- so if the axis is switched by using flex-direction:column, this means that it is actually looking at the height and applying the value to the height (instead of the width like before) ^
+
+- one limiting factor that you have to take into account
+- a lot of the time we're not just setting widths, we're setting things like max-widths and max-heights, min-widths etc
+- flex-basis will overwrite widths (as long as its on the main axis)
+- but if there is a min-width, it will prevent the flex-basis from kicking in (on the axis the min-height is applied)
+
+Notes:
+- does not work for images on google chrome, not sure why, its a bug
+- in order to make it work, on the element you set your flex basis on, you must also set its min-width and min-height to 0, not sure why it works***
+
+The Flex Shorthand Property
+===========================
+The same way that flex-flow combines flex direction and flex wrap, we can do the same with some other flex properties
+These properties are grow shrink and basis:
+
+- flex: grow shrink basis;
+- flex: 0 1 auto; (default normal behavior if nothing applied)
+- dont have to set all values, can just set 1 - but that sets the flex basis to 0 which makes it shrink as much as possible when needed
+- if you set just one value but it has a px unit, it knows you want to set the basis
+- can set it back to default by using the initial value 
+
+Note:
+- flexbox is all about the ideal size
+- when you set a width, or you set a flex-basis, it's not locking that in (unless you do a shrink or grow of 0)
+- a lot of the time theres usually a shrink (unless prevented) and a grow can be added in wanted
+
+
+Align-self:
+-----------
+- sometimes we went all of our items to stretch except for one, we can use align-self on that item
+- has the same properties as align items, but only applies it to the element that it is on (as long as the element is within a flex container)
+- allows you to have pieces all over the place, which can be useful for setting up different types of layouts
+
+
+Margin-auto and Flexbox
+------------------------
+- margin: auto   in normal situations centers your div horizontally (for top and bottom it defaults to 0)
+- however in a flex container, if an item has a margin auto it centers it vertically as well as horizontally
+- if you had just a margin-top of auto, it would put the element at the bottom of the container, and the opposite if you set the margin bottom
+- this is useful because if you switch the main axis using flex direction columns, you can no longer use align self to make a single element go to the bottom
+- if you use margin-top auto though, it will still allow you to get this functionality - pretty cool dude
+

@@ -1,0 +1,50 @@
+First Run
+---------
+Took me about 3 - 4 hours to complete the html and the css for the mobile version.
+
+- writing the structure of the html was not a problem, what I did have a problem with was filling it with content.
+	-> though I did not have the content ready to copy and pase, I still think I could do this much faster
+	-> I used the page up/down to move between the content and the html, copying and pasting each portion line by line
+	-> this meant going up and down the page multiple times, each time I had a chance of forgeting where exactly I was which costed me a couple seconds
+	-> a better way to do this is to copy and past each section that Im working on next to its html counter part
+	-> once I'm finished inserting the content, I can then delete the commented content, and proceed to repeat the process with the next section of content
+
+- I did things in a weird order
+	-> I went back and forth between typography, layout and spacing
+	-> this was not a good idea, caused confusion which wasted time
+	-> I should have done all the typography first, then the big layout, then moved on to the smaller component layout
+	-> after all was done, only then should I have worried about the spacing
+	->  obviously I can go back and forth when required, however, I should try to keep this at a minimum
+
+- not commiting to margin bottoms wasted some time
+	-> I needed to just have margin bottoms, instead I experimented with having different combinations for a bit
+	-> having just margin bottoms ended up being the best play, was easier to configure everything
+
+- not knowing the exact details of the typography and spacing cost me a lot of time of experimenting with different sizes.
+	-> i think the majority of time wasted was wasted here
+	-> trying to make the font look good instead of just following the design was a big time sink
+	-> also, certain parts of the design did not have the dimensions available
+	-> i need to have all of the details ironed out before attempting the next run, at least for typography
+
+- the thing with the zoom % was funny
+	-> coulnd't get the breakpoint to trigger for certain parts like the nav because I was so zoomed out LOL
+	-> also didn't realize that my website and the example on XD did not match up because of a different in zoom levels
+
+- creating the desktop version was ok, but could be better
+	- I had to figure out how to stop my aside images from shrinking with the screen, did this by giving their container a min-width
+	- sloppy with selecting names, cost me a few min - just need to pay more attention in general
+	
+- figured out why my image sizes looked so different from the XD examples even though I calculated the widths in ems...
+	-> forgot that em is not relevant to the font size of the root but to the element it is in (when not used for font size itself)
+	-> I was calculating the px-em conversion using 16px(root default), when I should have been calculating it with 18px(1.125rem)
+	-> this is because I changed my font size in the body, which changed the default font-size for every element
+	-> this ended up making every image too big because I was dividing the px by a smaller number, resulting in more ems
+
+Good things:
+
+- building mobile first was awesome, and 100% the way to go
+- once you get the mobile parts done, all you have to do for the desktop is figure out the layout
+	-> this means setting flex direction to row for the main container, and for each recent article
+	-> this also means setting the appropriate width for the items within those containers, as well as allowing spacing
+	-> this also means understanding that a % width can cause some of your containers (the aside) to shrink too much which makes the image in them shrink too much
+	-> the fix for this was give the aside container a min-width

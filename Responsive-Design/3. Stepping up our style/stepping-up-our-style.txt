@@ -1,0 +1,225 @@
+Stepping up our Style
+---------------------
+----------------------
+
+Polishing our Typography:
+-------------------------
+
+Some subtle CSS properties that can take something from "okay" to really polished:
+
+Line-height:
+- adds space between lines
+- takes the font-size and multiplies it by the lineheight, then applies it between line (half on top half on bottom)
+- too little line height makes things looked cramped and hard to read, too much looks double spaces and also hard to read
+- default is 1.4 - for the body we generally set: 1.5-1.7
+- start at the body line height, then fix any issues that pop up
+- for really big text or all-cap text, we generally want to use a smaller line-height
+- inherited
+
+
+text-transform:
+- formats text, can capatalize the first letter of each word, can upper case the whole thing, etc
+- gives the benifit of less typos from changing content manually
+- inherited
+
+letter-spacing:
+- makes some things easier to read
+- for example, when something is all uppercase its harder to read if the letter spacing is too close
+- either use em or px to define the value of the spacing (px for Kevin)
+- usually 1 or 2 px is enough, too much looks terrible
+- useful for all cap text or really small text
+- inherited
+
+
+Color Trick with rgba():
+- you can have a text color that changes with its background by using rgba
+- to do this, you set the color of the text to pure white, but set the alpha (opacity) to .50-.80
+- this allows some of the background color to come through, which makes the text match it very well
+- you can do this with a pure white or a pure black background
+
+Background-images:
+------------------
+- very popular
+- we should use these when we have something on top of our image, if we dont, we should just use a regular image
+- these are decorative, so they are not a priority to display properly - they fill in their container, but the whole image isnt used sometimes
+- if the container is bigger than the image, the image will tile and repeat itself
+- in other words, the image does not stretch itself or shrink itself to fit its container, it exists at its size, and the container will display as much of it as the container's size allows, repeating the image if it is bigger
+- having this repeating tile pattern can be super useful to set small image as an entire patterned background
+
+- syntax: background-image: url(../folder/filename.jpg);
+	-> note that the path starts in the css file, so you would have to navigate out of the css folder, navigate to where the image is then specify the image
+
+
+Controlling background images:
+-> there are some properties that help us control background images
+-> position, size, attachment, repeat, and some more (background-property - how it is used)
+
+position:
+- can change position of the background image (duh)
+- can be given two values, one for position on the horizontal, the other for the vertical position
+- can also be given words, e.g. 'top left', which prevents the top left corner from being cropped
+- bottom-right, center center (other examples)
+
+size:
+- changes the size of the background image (keeps the repeating pattern)
+- can be given two values, first is width, second is height
+- can also be given keywords
+- the default is 'auto'
+- 'contain' makes sure you can see your entire image, will still repeat if there is space
+- 'cover' fills the space left with the image, crops the image if it doesn't fit - can lose quality if too big
+
+repeat:
+- can control how the image repeats
+- can make it not repeat, only repeat on the x axis, and only the y axis 
+- not used very often in the present
+
+Note:
+- these days, some position combined with the 'cover' size is common
+
+
+Combinators:
+-----------
+- Adjacent sibling selector. eg h1 + p : selects any p that comes after an h1
+	-> relies on your markup being structured a certain way, probably better to use a class (incase your html changes in the  future)
+- Sibling combinator. eg h1 ~ p: anything that is a paragraph and is also a sibling of an h1 (must come after the h1 though)
+
+
+Box-sizing:
+-----------
+- by default, this is set to content-box
+	-> this applies any defined width/height to the content, and does not include the padding, border or margins into the total measurement
+	-> so width:200px = the size of the content, nothing else
+	-> padding and border are added to the width/height
+- there is another very useful value called border-box
+	-> this includes everything into the measurement except for margins. 
+	-> so width:200px = the content + the padding + the border
+	-> padding and border are included in the width/height
+
+This is important because in content-box mode, if we use a vh of 100, it will cause scrolling on any size screen if there is any padding on the element.
+	- this happens because we are adding the padding to the 100vh, so the height of the element will always be greater than the whole viewport
+However, if we use border-box mode, then the padding is included in that 100 vh, which eliminates scrolling on screen sizes that are big enough
+
+We usually set this to everything (* selector) because it makes calculating sizes so much easier. Used in every project.
+
+
+Viewport Units:
+---------------
+- vw, vh, vmin, vmax (viewport width, height, minimum, maximum)
+- are a responsive unit
+- percentages look at the width of the parent, viewport units always look at the size of the browser window
+- I dont understand vmin and vmax, look confusing and kinda useless tbh
+- vw and vh pretty much work like percentages, in that the number that you use to define them represent the percentage of the page dimension (height or width)
+- when setting a height in vh, its probably best to set it as a min-height
+ 	-> when it runs into a situation where there is some scrolling (small screen), it wont break your website
+
+
+The very basics of forms:
+-------------------------
+- html forms allow users to send data, often to the server, which can then send that off as an email
+- they are a little different to everything we've seen so far.
+
+A few new elements:
+- <form> 	the form element
+- <label> 	describes the different form elements to users so they know what they are for
+- <input> 	where the user can input information. Many different types (text, checkbox, radio email, color, date, password, file)
+- <button> 	used to submit the form (among other things)"
+- <br>		linebreak
+
+The form has a few suggested attributes:
+- action:   what should happen after when the button is clicked (what page are you navigating to after)
+- method:   what is the form doing (post = sending to the server)
+
+To be properly connected though, we need a few extra attributes:
+- for: used on labels to select the id of the input they are meant to be connected with
+- id: used on inputs to give them an id in order to be connected with their label
+- considered good practise to do this, also gives mobile users a much easier to click area(helps with assistive technology as well)
+- a shorter but less explicit way to do this is to wrap the entire input element inside the label element(not recommended)
+- if we wanted a form that has input elements that don't have a label (for asthetic reasons), we can give the input element its own aria label which will still help for assistive technology
+
+Buttons are needed to actually submit the form:
+- for a button to work, it needs to have the attribute "type = 'submit'"
+- tells the browser that this is the button to submit the form that it contained in
+- there is also another button type of reset, not considered best practise at all. Doesn't submit, just deleted everything
+
+
+Form Attributes:
+----------------
+Lots of attributes that we can add to our form elements.
+- required: is a required field, warning will pop up if form is submitted without a required field being filled or if an email is formatted wrong
+- value: enters a specified default text inside the field, must be deleted by the user(not recommended)
+- placeholder: the same as value, but greyed out and not really text(disappears when you start writing) - very useful
+- disabled: disables a field
+
+Styling:
+Forms have a lot of default styles, can be annoying. Doesn't cause that many problems as we're just overwriting the defaults. (though some defaults are good)
+
+You generealy want to put a class on all of the form elements especially inputs because there are so many types, and some styles wont apply to every type.
+Also buttons will be used for different things generally, so we usually don't want them to be styled the same either.
+
+Buttons:
+- do not have a hover state, not easy to tell that they are clickable if there is no background or border
+- cursor: pointer; is a common attribute we can use to make it more obvious
+
+Inputs:
+- you want to 
+
+
+Gradients:
+----------
+Gradients are actually a type of background image in css. There are two types
+-linear - left to right, up to down, top corner to bottom corner, etc
+-radial - from the middle out, not used a lot
+
+- can be give two colors
+- can be given a direction, degrees(45deg)
+- can also put the percentage of the element that you want a color to cover before starting to turn into the gradient (orange 75%)
+
+eg. 	background-image: linear-gradient(red,blue);
+	background-image: linear-gradient(to right, red, blue)
+
+Transitions:
+------------
+- syntax: transition: 500ms (can do in ms or s)
+- short hand can just specify the transition time - sets it for the trasition, duration, timing function and the delay
+- can tell it what property we want it to transition (all, color... note all effects performance)
+- must be set on the normal selector not the hover psuedo selector, otherwise it will only work while hovering, instead of working when you enter and leave a hover state
+- certain things cant be transitioned (background images, however their position and size can)
+- 250ms- 500ms is a good transition time
+
+- transitions can really effect performance if overdone, causing choppy animations instead of smooth, hard for the browser to be able to do it
+- there are certain properties that we can animate. Three of them fall under transform(translate, scale, rotate), and there is also opacity.
+ 	-> all gpu accelerated so the computer can handle them much better
+
+transform:scale():
+- scales the element up or down base on the number in the parenthesis (1 = 100%, 1.5 =150% etc)	
+- doesn't affect the flow of the document, meaning that it is recognized by all the other elements as its original size - only visually gets bigger
+
+border-image:
+-------------
+- just like there is a background-image gradient, you can do the same with a border-image for borders 
+- the way they are calculated are confusing, it assumes you are using an image, not a gradient
+- because its assuming its an image, you have to set it up and tell it how to use the image that you are giving it to set up the border that you are setting up
+- border-image: linear-gradient(to left, #ff713b, #ffa51d) 1;  (the one at the end is telling it how to use the image, always works in the case of a gradient)
+
+background image tricks:
+------------------------
+- most images have dark and light areas in them that make it hard to read any text that is overlayed on top of it
+- background blend mode is one way to deal with this
+- for it to work, you need a background image and a color, or two background images
+- three main types of background-blend-mode: multiply, screen, and overlay
+- multiply keeps dark pixels, screen keeps light pixels and overlay keeps neutrals and just in general boosts contrast
+General notes:
+- using padding to center elements in another element can prevent those elements from moving to the borders where the padding is, keep that in mind for certain designs (can use flexbox instead)
+- its a good idea to have a background-color with your background-image in case the image doesn't load fast enough, atleast the user can see a background (order doesn't matter, image always on top)
+- remember that display:flex ignores collapsing margins - can be very helpful in most situations
+- you don't want your text to get too close to the sides (width: 90%, margin: 0 auto, padding etc. the smaller the text, the more space you want to have)
+- in general, on larger screens, people are farther away from there screens, so we want a bigger font-size
+- forms don't inherit the way that other elements do, have to overwrite their defaults
+
+
+- instead of putting everything in a container and managing max-width of content like that, we can do something else
+	-> an alternative way is to select everything in an element (.element * {}) and give that a max-width
+	-> using margin: 0 auto; here would reset any margins we have set inside this element, so instead we specifically set the margin-left and margin-right to 0 in order to center the content
+	-> if we have any nested elements, they might cause an issue - a safer selector would be .element > * {}  
+	-> sets anything that is the direct child of the element ^
+	-> using the * selector always has a slightly greater chance of causing a performance issue, or issues when changing your layout - theres a potential for problems, not necessarily bad but not optimal
