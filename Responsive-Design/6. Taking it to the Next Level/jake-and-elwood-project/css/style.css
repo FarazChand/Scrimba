@@ -1,144 +1,211 @@
-* {
-    box-sizing: border-box;
-}
+* {box-sizing: border-box;}
 
 body {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
-    color: #000;
-    font-size: 16px;
+    font-size: 1rem;
+    color: #404040;
     line-height: 1.6;
 }
 
-img {
-    display: block;
-    max-width: 100%;
+
+
+/* ================
+    Typography
+=================== */
+
+h1, h2, strong {
+    font-weight: 700;
 }
 
-/* =========== */
-/* Typography */
-/* ========= */
+.accent-color {
+    color: #FFE600;
+}
 
-.logo {
-    background : #FFE600;
+.hero-title {
+    font-size: 1.5rem;
+    line-height: 1.4;
+    margin-bottom: 0;
+}
+
+.section-title {
+   font-size: 1.125rem;
+   color: #000; 
+   margin-top: 1.25em
+}
+
+/* buttons */
+
+.btn {
+    padding: .5em 1.5em;
+    font-weight: 700;
+}
+
+.btn-primary {
+     background: #FFE600;
+     color: #000;
+     justify-self: start;
+}
+
+
+/* ================
+   general layout
+=================== */
+
+.main-grid {
+    display: grid;
+    grid-template-columns: minmax(1em, 1fr) minmax(0,500px) minmax(1em, 1fr);
+}
+
+@media (min-width: 600px) {
+    .main-grid {
+        grid-template-columns:  minmax(1em, 1fr) repeat(3, minmax(150px, 320px)) minmax(1em, 1fr);
+        grid-gap: 0 2em;
+    }
+}
+
+/* navigation */
+.header {
+    background: #000;
+}
+
+.header-content {
+    display: flex;
+    grid-column: 2 / -2;
+}
+
+.logo-link {
+    background: #FFE600;
     padding-top: 2em;
 }
 
-ul {
+.nav-list {
+    display: flex;
     list-style: none;
-    padding: 0;
     margin: 0;
-}
-
-a {
-    text-decoration: none;
-    font-weight: bold;
+    padding: 0;
 }
 
 .nav-link {
     color: #fff;
-    font-size: 0.875rem;
-    margin:0;
+}
+/* footer */
+
+.footer {
+    background: #ebebeb;
+    padding: 4em 0;
+    text-align: center;
+    grid-template-areas: 
+        ". social ."
+        ". main .";
 }
 
-h1,
-.main-body {
+.footer-main,
+.social-list {
+    grid-column: 2/-2;
+}
+
+.footer-main {
+    grid-area: main;
+}
+
+.footer-logo,
+.footer-text,
+.footer-fineprint {
+    opacity: .3;
+}
+
+
+.footer-fineprint {
+    font-size: .75rem;
+    margin-top: 4em;
+}
+
+.social-list {
+    grid-area: social;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2em;  
+    display:flex;
+    justify-content: center;
+    gap: 1em; 
+}
+
+.social-link {
+    color: #000;
+    font-size: 1.75rem;
+    margin: 0 .5rem;
+ 
+}
+
+.social-link:hover {
+      color: #777;
+}
+
+@media (min-width:600px) {
+   
+    .footer {
+        grid-template-areas:
+            ". main main social ."
+    }
+   
+    .footer-main {
+      text-align: start;
+    }
+
+    .social-list {
+        justify-self: flex-end;
+    }
+
+
+
+}
+
+/* ================
+    hero area
+=================== */
+
+.hero {
+    background-image: url(../images/hero-bg.jpg);
+    background-size: cover;
+    background-position: bottom;
+    padding: 4em 0;
     color: #fff;
 }
 
-h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-top: 0;
-    line-height: 1;
+ .hero > * {
+    grid-column: 2/ -2;
+ }
+
+ @media (min-width: 600px) {
+    .hero {
+        padding: 6em 0;
+    }
+
+    .hero > * {
+        grid-column: 2 / span 2;
+    }
+ }
+
+ /* ================
+    info area
+=================== */
+
+.info {
+    padding: 4em 0;
+    text-align: center;
 }
 
-.main-body {
-    font-size: 1.125rem;
+.col {
+    grid-column: 2 / -2;
 }
 
-strong {
-    font-weight: 700;
-    color: #FFE600;
+@media (min-width: 600px) {
+    .col {
+        grid-column: span 1;
+    }
+
+    .col:first-child {
+        grid-column: 2;
+    }
 }
-
-.btn {
-    padding: 1em 2em;
-    display: inline-block;
-}
-
-.btn-primary {
-    background: #FFE600;
-    color: black;
-}
-
-.info-title {
-    font-size: 1.125rem;
-    font-weight: 700;
-}
-
-.info strong {
-    color: #000;
-}
-
-.footer-body,
-.footer-copy {
-    color: #404040;;
-}
-
-.footer-copy {
-    font-size: .5rem
-}
-
-.socials   {
-    display: flex;
-}
-
-/* ======= */
-/* Layout */
-/* ===== */
-
-header {
-    background: #000;
-}
-
-
-main {
-    background: #000;
-    background-image: url("../images/hero-bg.jpg");
-    background-position: bottom right;
-    background-repeat: no-repeat;
-    padding: 3em 0;
-}
-
-
-
-
-
-
-.container-nav
-
-
-
-
-
-
-
-/* .container-nav {
-    grid-area: header;
-}
-
-.container {
-   
-    grid-area: main;
-    max-width: 1200px;
-    width: 85%;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: auto auto minmax(100px, 40%);
-    grid-template-areas: 
-        "header header header"
-        "main main ..."
-        "info info info"
-        "footer footer footer"
-} */
