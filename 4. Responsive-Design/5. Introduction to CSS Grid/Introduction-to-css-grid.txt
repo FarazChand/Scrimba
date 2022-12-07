@@ -1,0 +1,268 @@
+Introduction to CSS Grid
+========================
+- Flexbox is great, but it does have its limitations. Only deals with 1 dimension at a time
+- if we have a flex-direction:row, we get columns, we're working on the horizontal dimension
+- if we have a flex-direction:column, we get rows, we're working on the vertical dimension
+- if we want rows and colums, we need extra markup in order to create rows, which inside of we have flex items
+
+
+Enter CSS Grid:
+---------------
+- enables us to create a grid
+- can work on both the vertical and horizontal axis at the same time
+- the parent div can be split up into rows and columns
+- this makes some complicated layouts a lot easier to pull off
+- this allows us to simplify our markup
+- we don't have to think about how content needs to be grouped, resulting in a much flatter HTML
+
+Note:
+- it does simplify the markup, but also comes with added complexity
+- there are A LOT of new properties to learn as well as a new unit
+- though it is more complex than flexbox, it is totally worth knowing how to use grid and have it as a tool on your belt
+
+
+Setting up a Basic Grid:
+------------------------
+- first step is display:grid; on the parent element
+- creates a new grid formatting context
+- similar to how we display:flex
+- margins no longer collapse and direct children become grid items
+- similar to flexbox, once a grid container is created, its children will fall into the grid
+- however, they don't become columns right away like in flexbox, the only change we really see instantly is that margins no longer collapse
+
+
+To properly use CSS Grid, we need to define our rows and columns:
+- flexbox only deals with one dimension, so we don't have to worry about rows and columns, we just switch flex-direction when needed
+- with grid, we have both. We can explicitly create them and then place items within  the grid that we have created
+
+
+Template rows and columns:
+--------------------------
+e.g. grid-template-columns: 200px 200px 300px;
+- takes the parent, divides it into 3 columns with the above stated dimensions (width)
+- anytime you are defining columns, you are defining the width of the columns
+
+eg. grid-template-rows: 50px 200px;
+- takes the parent, divides it into 2 rows with the above stated dimension (height)
+- anytime you are defining rows your are difining the height of the rows
+
+- once templated, content will automatically flow into their column, once all columns on the first row are filled, they will flow into the next row with the same dimensions
+
+There is a short hand where you can define both at the same time:
+eg grid-template: 100px 400px / 250px 250px 250px  (rows/columns)
+
+
+Placing Items on the Grid:
+--------------------------
+- content will place itself automatically on the gird
+- however, we can explicitly place items where we want them to be
+- we can tell grid items exactly where they live within their parent's grid with the following properties:
+	-> grid-column-start
+	-> grid-column-end
+	-> grid-row-start
+	-> grid-row-end
+
+- used on the grid-item, not the parent
+- the grid itself is made of column lines and row lines, each having their own number (look at a picture to understand better)
+- when we want to place items, we use these line numbers to tell them where to go
+- we tell them where to start and end
+- cant have an L shape or weird shapes, can only be rectangular
+
+
+Grid-row and Grid-column shorthands:
+------------------------------------
+e.g. (replace words with column/row number)
+
+grid-row: start/end
+grid-column: start/end 
+
+- much better to do it this way for readability and ease of life
+
+We can also tell our items how far to span instead of defining the grid lines:
+eg. 
+instead of	grid-column: 1/3;
+we can do	grid-column: span 2;	same thing, depends what you wanna do
+
+eg.
+instead of	grid-column: 2 / 4;	
+we can do	grid-column: 2 / span 2;	same thing
+
+- works on rows too
+- depending on the circumstances, can be easier than counting column numbers
+
+if you only want the item spaning one column/row, you can just use a single number to indicate where to start, and it will assume its spanning one row
+eg.
+grid-column: 2/3; 	is the same thing as 	grid-column: 2;
+
+
+Notes:
+- grid items will try not to overlap but if you explicitly tell them to do so, they will
+- you can use negative numbers to define the grid lines (-1 is the last grid line - this number is used the most)
+- images are weird, even when you define their grid lines, they wont occupy them properly
+	-> in order to fix this you must define their width and height at 100%
+	-> this doesn't mean 100% of their parent in this context, rather, 100% of the grid cell you've defined through gird lines
+- you can create padding by adding a column/row of that padding width in the location of where its needed, can be useful for more complicated layouts (not sure why yet)
+	-> this column will be an empty column, we make sure none of the items are inside this column
+	-> useful for flattening out our layout and avoiding certain things
+
+
+Some Similarities to flexbox:
+-----------------------------
+- most of the time when defining our rows (and sometimes our columns), we don't want to set an exact height, we just want it to match the content
+- we can do that by using the auto keyword
+- when we do this, the height of the row will be dictated by the grid item with the largest height
+- if we don't declare a grid-template-row or if we have more rows than we have defined, they will default to auto
+- this is a good thing, and the behaviour that we want most of the time
+- like flex items, grid items stretch by default
+
+Align items:
+- just like flexbox, our grid container has a property called align-items
+- instead of flex-start or flex-end, its just start and end, works the same as flexbox (shrinks content to natural size and aligns)
+- we also have center and baseline for this property as well
+
+Justify items:
+- grids stretch vertically to match the height of the tallest item, but they also stretch horizontally to match the width of the column that they're inside of
+- if we don't want them to do that, we can use items justify-items property on the parent
+- has the same values as align items, but behaves on the horizontal axis
+
+You can do these on individual grid items as well, like how flexbox has align-self
+- align-self:
+- justify-self:
+- both of these have the same values available as justify items and align items
+
+
+The grid-gap property:
+----------------------
+- can add gaps between rows and columns with:
+	-> grid-column-gap
+	-> grid-row-gap
+	-> grid-gap (short hand)  first number is rows, second is columns. if only one number then it is both
+- does not put a gap on the outside, only puts a gap inbetween rows/columns
+	-> in order to do this you need to create empty rows/columns where you want there to be space on the outside
+-grid-gap property is being replaced by gap, but it is only supported by firefox rn
+	-> will work for both flexbox and grid
+
+
+The Implicit and explicit grid:
+-------------------------------
+- when we declare display:grid on an element, all the grid items are automatically placed in a row, even if we haven't created any yet
+- the same thing happens with the columns, though it will default to only one column
+- when we set up grid-template-columns and grid-template-rows, we are explicitly stating how big they must be
+- sometimes, columns and rows are created automatically, these are implicit rows and columns
+- for example, if you have a grid that has column line 1-4, and you tell a grid item to live in the lines 5-6
+	-> even though the grid lines 5-6 doesn't exist in that current grid, the grid will implicitly create the grid lines to accomadate your grid item
+	-> this also means that any columns that didn't exist between your original grid and the implied item will also be created
+	-> this only happens because you told the grid item to live in that cell
+	-> they are note explicitly stated in the grid-template, but they are implied they exist in the grid item***
+
+- they default to auto (the width and height of the content)
+- if we want, we can state how big we want our implicit items to be by using these properties on the grid container:
+	-> grid-auto-rows
+	-> grid-auto-columns
+
+
+Exploring Grid Areas:
+----------------------
+- keep track of rows and columns can be a chore, we can simplify things by assigning grid areas
+- when we create grid areas, we're effectively giving names to different parts of our grid, and then we can assign items to those areas very easily
+- it can seem like a bit of extra work at first, but the payoff can be worth it 
+
+How its used:
+- grid-template-areas: "name name name2 name3"
+			"name4 name5 name5 name5"
+- as you can see, we use quotation marks, we put the name of the content we want in the grid cells we want them in
+- multiple adjacent cells with the same name mean that the content is spaning those cells
+
+- we assign a grid item to a grid area by using this property on a grid item: grid-area: content-name; (where content name is the name of the content you want to appear in that grid area
+- always remember than you can only do rectangular shapes, no weird shapes
+- any items inside of the grid that are not defined in the grid-template-area will just move to the next available spot after the grid-area, in an implicitly created row
+- we can also use "." as a name for a cell, which will tell the grid to ignore that cell (empty cell), can be multiple dots or a single dot, same effect
+
+
+Grid-Areas and Media Queries:
+-----------------------------
+- up until now we have been setting our rows and columns to a set size, which is not very responsive
+- however, css grid can be really responsive
+- this is done through building media queries and using grid-template-areas with those media queries
+- the reason grid-template-areas makes this so easy is because you don't have to deal with grid lines within the media query, which can be a pain if the template changes a lot
+- without grid areas:
+	-> you have to redefine your columns
+	-> you have to redefine your rows
+	-> then you have to change all the gridlines that your items span in order for things to work
+	-> can be time consuming and confusing
+
+with grid areas:
+- you can easily create a mobile layout and use a media query to redefine the desktop layout, without having to tell each grid item what exact grid lines they need to be spanning
+- all you have to do is redefine the grid areas in the way you want, and the whole layout automatically changes!
+- its also much easier to visualize if you format the css properly
+
+
+Minmax():
+---------
+- kinda like setting a min-width and a max-width to our template columns and rows
+- when assigning a size to our grid-template-columns or rows, we don't have to give it a specific size 
+- using minmax() we can assign them a minimum and maximum size
+- we assign the two values inside of the parenthesis, seperated by a comma
+	eg minmax(100px, 300px)
+	   minmax(3em, 10em)
+	   minmax(200px, 50%)
+- if your minimum value is bigger than your maximum, it will just ignore it and just use the maximum, and vise versa
+
+
+The 'fr' Unit:
+--------------
+- getting rows and columns to behave more like flex items
+- the fr unit is used to distribute a fraction of the available space.
+- By using this for  the size of a grid-item, it becomse a flexible item and behaves much like a flex item does when it's set to flex:1 1 auto;
+
+How its used:
+grid-template-columns: 1fr 1fr 1fr
+- each fr is a fraction of the space distributed
+- if something is 2fr, it grows at twice the speed and is always at double the lenght of 1fr
+
+
+Minmax() and the fr Unit:
+-------------------------
+- fr is used very freequently, but we must be careful using it with minmax()
+- because of how to fr unit works we cannot use it as the minimum size
+- frs work great as a max value
+
+
+min-content: can set on one of the columns and rows in template columns/rows  to this, will shrink content to as small as it can be (to its longest word for example)
+max-content: same thing^ but sets it to its max width (the whole line of text, but no longer) shrinks to fit the content inside of it
+
+
+repeat():
+---------
+- when defining template rows/columns, if multiple columns have the same width, we can use repeat() 
+- first we define how many times we want it to be repeated, and then the size
+- the two values must be comma seperated
+
+eg. 	grid-template-columns: repeat(4, 300px) -> creates 4 columns of 300px width each
+
+-can be used with other columns:
+	grid-template-columns: 200px repeat(4, 300px) -> first creates a column of 200px, then creates 4 columns of 300px width each
+
+-can use frs and minmax(), very powerful
+
+
+Note:
+- css grid is a powerful tool, however, we usually use css grid for overall bigger layouts
+- we tend to leave the simpler component layouts for flexbox
+
+
+Auto-fit and auto-fill:
+-----------------------
+- when using repeat, instead of a set number of times, we can use auto-fit or auto-fill as well
+- the two of them are different, though the difference can be confusing at first
+
+auto-fit:
+- will fit the columns you've defined into the available space
+- as a grid container grows, as soon as there is enough room to fit another item in a row, it will do so
+
+auto-fill:
+- will keep adding in new columns, even if they are empty
+- as a grid container grows, as soon as there is enough room to fit another item in a row, it will do so.. however
+- if there is no more items, but there is room to fit another, it will FILL it with an empty column of the same width
+
+both of these are very powerful while using a minmax with, kev likes fit more than fill

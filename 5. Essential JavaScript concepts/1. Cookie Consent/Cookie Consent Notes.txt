@@ -1,0 +1,21 @@
+
+Form elements:
+--------------
+- when we have inputs wrapped in an html form element, it allows us to treat that group of inputs as a single entity
+- this allows us to handle the data collected quickly and efficiently, whether we are using it on the front end or sending it off to a server
+- forms area also good for accessibility
+
+
+Position: fixed:
+----------------
+- can be used to take an element out of the regular flow of elements of the page, and get more control over where we position it
+- usually elements are positioned in the order they appear in the html - top to bottom, left to right (unless changed using css/js)
+- we use this to fix the position of an element relative to the viewport (the usable, visible part of the browser)
+- note that we can center an element in the middle of the viewport by changing its top, bottom, left and right values to 0, and then setting its margin to auto
+- this element will now remain in the middle of the viewport even if you scroll
+
+setTimeout:
+-----------
+- can delay execution of your code
+- normally our code is read from top to bottom and executes in order
+- with setTimeout, we can remove a block of code from that flow and have it execute later

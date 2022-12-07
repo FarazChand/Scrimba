@@ -1,0 +1,179 @@
+- we are doing a bit of a larger project this module
+- we are going to be using grid for the larger layout and flex box for the smaller components
+- the first thing we are going to do is analyze the layout
+	-> going to try to break things down by components as much as possible
+	-> these are layout components, different from a web app component
+- we do a mobile version as well
+
+Analyzing the layouts:
+----------------------
+- the first thing we should do when building the site is to analyze it, people make the mistake of just trying to build it right away
+- this is especially important when you are building a multi-page layout and looking for reusable parts to save you time in the long run
+- in this project, there are a lot of places where we can use and reuse a grid
+	-> remember that grid keeps the markup flat an easier to read
+- we want to really pay attention to any repetition in the layout and plan for it, as well of taking note of the modifications
+
+
+
+Using Font Awesome for our icons:
+---------------------------------
+- a giant liabrary of icons that we can use in our site
+- free set is robust, can subscribe for more
+- can dive very deep into this topic but we are only going to look at the basics of getting logos on a website
+- to use Font Awesome, you need to get a link - just like google fonts
+- if you're going to be using it on your own projects, they ask for your email address, and they'll send you the link to put, because everyone gets a custom link
+- so many icons available, it can actually slow things down
+- have the option to link to only things such as their solid or outline fonts, or only the brand fonts, or custom sets of fonts
+- were using a link from cdnjs.com which is a website that hosts links to a bunch of libraries
+
+-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+- needed to use above link as the one in the tutorial was outdated
+- https://cdnjs.com/libraries/font-awesome   -> can go here to get the libraries
+- in the html, these were placed in a ul>li>a
+- these icons can be styled as if they were links
+
+
+Position: Absolute:
+-------------------
+- very useful but also very abused property, should only be used when absolutely necessary, for example - with mobile navs
+- takes an element out of the flow of the document, can sorta put it wherever you want
+- position: fixed: similar but stays in the same position of the viewport
+
+
+Creating a mobile navigation:
+-----------------------------
+- first changed the nav's position property to fixed in order to make sure it would not change on scroll (mobile navs usually cover the whole screen)
+- we set its top, right, left, and bottom properties to 0 in order to allow the nav to cover the whole viewport(which is the closest parent that is relative, i think the body)
+- note that we will change the left property to 100% after we have finished styling the nav list and the close button, in order to move it off of the page 
+- we also change the nav's width to 100% to let it keep its full size covering the viewport
+- then we took its child element, the nav list, display: flex, align center and justify space between as well as switch flex directions
+
+The close button:
+-----------------
+- we added a button as the first child to our nav
+- we made its content the html enity &times; - which is a better looking x symbol
+- gave it a class(to style) and an aria-label(in order to let screen readers understand what the purpose of the button is) 
+- styled it: removed border, background, gave it a font color and weight, increase font size, cursor:pointer to make it clickable and some padding
+- also give it a position of absolute to pull it out of the flow and prevent it from moving the other links out of their position
+- we will attach JS functionality to this button
+
+Creating the open state:
+------------------------
+- we are about to change the left properties of the nav, so we give it a width:100% in order to keep its width at full size
+- we change the left property to 100% in order to move the whole nav off the screen so we can see the content below it (this is the closed state)
+- we also set the navs transform: translateX property to 0 (to add a transition later on)
+- we create another selector class called navigation-open, which has the transfrom: translateX property which we set to -100%(in order to move the nav back, thus the open state)
+- this class is added after our nav class in the css in order to be able to overwrite the nav's css once added to the element
+- we will later add and remove this clase to the nav using JS in order to open and close the nav, thus overwriting the navs close state 
+- basically just changes the translate property to allow the nav to comeback into the view port
+
+Adding the functionality to the Close Button with JS:
+-----------------------------------------------------
+- we create a JS file and link it to our html document in the very end of our body tag (after the footer)
+- note that it is placed here because JS files take time to load, if it was placed at the top, we would have to wait for the JS file to load before being able to see the rest of the page
+- we select our close button and nav from the document using querySelectors
+- we then add an event listener on the close button so that when the button is clicked, it looks through the nav elements class list and removes the navigation-open class that is causing its open state
+- to test if this is working, we can temporarily add that class to the html ourselves, then click the button to see if it closes the nav (meaning that the class has been removed, can see this in the dev tools)
+
+
+Creating the Open button:
+-------------------------
+- we create another button in our html, this time adding it right before our nav element (not inside like the close button)
+- we give it a different html entity of &#9776; as its content, which is a burger menu
+- we obviously give it a class of open-nav(to style it) and an aria label(for assistive technologies)
+
+
+Adding the functionality to the Open Button with JS:
+----------------------------------------------------
+- same steps as the close button, only we are selecting the open button through the open-nav class, adding an event listener to it, telling it to add the open-navigation class to the nav when clicked.
+- we can also add a cool lil transition to the nav: transition: transform 250ms;  in order to make the nav slide in all cool and shi
+- note that we added to the nav because that is what the translate property is on (causing the change), the nav is what is moving on and off the screen
+- once we add this step, we can remove the 'navigation-open' class from our nav in our html (we did this to test the close button earlier)
+
+
+Navigation on Larger Screens:
+-----------------------------
+- we want the nav to appear differently on bigger screens, we don't want the burger or the nav off screen, we want everything displayed in a typical desktop layout
+- we start by creating the media query
+- we select our open-nav and our close-nav classes, and give them a display:none - we don't want to see these buttons at bigger screens
+- we set our nav to have a position:initial, which sets it back to what it originally was
+- we change our nav-list's flex-direction to row, as well as justify-content to flex-start (puts the list to the left side like we want)
+- change our nav-link's font-size back to 1rem
+- give our nav-items(li) a margin left of 2em to give them some space
+
+
+Making the Header background transparent on the homepage only:
+--------------------------------------------------------------
+- we create a class that for our header called header-home, which will only be used on this element on the homepage (this element repeats itself on other pages)
+- we need to select this class in our css, as well as select the .header-home .nav compound class (this element has a specified background and there for needs to be explicitly overwritten)
+- the .header-home .nav class should be placed in your media query so that the background only changes on larger screens, if we don't do this, the mobile nav background will be transparent, which will make your website visble while the nav is open (no bueno)
+- we change the background to transparent on both of these classes
+- we want to give the .header-home class a position of absolute so that it is no longer in the flow of the document, which allows the hero to move up (the hero has the background we want for our header)
+- this also changes the width of our header(shrinks it to its minimum size, so we want to also give it a width of 100%
+- our spacing is way off now, so we can fix that by adding some padding to the top of our hero section, remember to change it for all screen sizes (media queries)
+
+
+Building the template pages:
+---------------------------
+- the header stays the same, the footer stays the same, the only thing that really changes is the main section
+- we do remove the .header-home class from the header though
+- we give our main element the class of main-grid (the one we created before for all the other elements we wanted to have a grid for)
+- this allows it to have the same formatting as everything else
+- in this project, it seems that all of the class names for the elements on the page are different (mostly for the divs, the page title) but the smaller elements like the section-title and p, as well as subtitle are the same
+- this means that those smaller components have the same styling, however, the larger components made up of these smaller components have their own css 
+- makes it easy to layout without breaking our home page, as well as being able to reuse some css
+
+- we add the class of main-template to our main element, in order to be able to only use styling for the template pages and not effect the home page
+- we can set the direct children of this main-template class to have the right column areas, which sets everything up for small screens right away
+- we also need to fix our image - set their max width to 100% and their display to block (usually) however in this project, it doesn't really make any positive impact, and actually breaks some of our code in the footer - so we dont set it to block
+- side note, i beleive we should have had img set how we normally would from the start, and when we got to our footer, fixed the code there - I don't think we should be inconsistent with out css resets
+
+
+Adding the effect to the image:
+-------------------------------
+
+Box shadow:
+- eg box-shadow: 20px 20px 20px 50px black;
+- the first value is for the left and right offset (positive right, negative left)
+- the second value is for the up and down offeset  (positive up, negative down)
+- the third value is how big the blur is
+- the fourth value is optional, and it controls how far the shadow goes before the blur starts
+
+- remember that you can add two box shadows at the same time by comma seperating when defining the property:
+	e.g. box-shadow: 5px 5px 0 #000, 10px 10px 0 #ffe600;  (defines two box shadow properties on the same element with different sizes and colors, made possible by the comma that seperates them)
+- this works on other properties like some of the background-image properties
+
+Note that you should try not to use pure black as a background shadow unless its for a specific decorative purpose, isntead you want a more transparent black so that its not so jarring
+
+
+
+Using Pseudo elements to add the yellow lines:
+----------------------------------------------
+- section-title:firstchild is a psuedo class, it has one colon which also indicates this
+- section-title::after is a psuedo element, it has two colons which indicates this
+
+- a psuedo element is actually adding an element to our html
+- there are two(so far that I know of) , before and after
+- after is going after the CONTENT INSIDE your element, while before is obviously going before the content inside your element (not before and after the element itself, common misunderstanding)
+- this is useful because it allows you to add these cool decorative elements (like the underline) that would usually require you to use a span, which means you would have to insert the span in every area you would want to use it in your html
+	- in this project, not a big deal, but in a project where there might be a lot of places to do this, it would be very annoying to do this
+	- this means that we don't have to add extra mark up for these decorative elements
+
+- these require you to have a content property, even if you leave it blank. If you neglect to do this, the element will not render on the page
+- you also need a position or a display, in our case we used a display:block
+- we then styled it to our taste - changed the width, height and color
+
+- note that you can only have one after and one before  psuedo element for each element
+- also note that you can select the same psuedo element using different classes on the same element 
+	eg. for an h2 with the classes class1 and class2, using class1::after is the same as using class2::after
+
+
+
+
+
+
+
+Notes:
+- you can use order for grid aswell, to change the visual order of things if you wanted to
+- positon absolute can be used to move an element, but it takes it out of the flow of the document
+- transform: translate can be used to move an element, but other elements act as if the moved element has not moved, big difference

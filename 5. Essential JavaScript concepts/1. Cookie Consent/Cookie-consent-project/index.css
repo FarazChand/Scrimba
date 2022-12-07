@@ -57,6 +57,11 @@ img{
     width: 100%;
 }
 
+.img-bugatti {
+    height: 400px;
+    object-fit: cover;
+}
+
 main{
     width: 400px;
     margin: 0 auto;

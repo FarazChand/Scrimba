@@ -21,7 +21,7 @@ Flex-Direction:
 	-> which acts like columns but reverses the order (not really used but good to know)
 
 Notes:
-- remember that ACTUAL order and VISUAL order are different, acual order being more important always
+- remember that ACTUAL order and VISUAL order are different, actual order being more important always
 
 
 Flex-wrap:
@@ -35,7 +35,7 @@ Flex-wrap:
 
 - wrap:
 	-> the widths do not shrink, (keep the size of their text or set widths) - unless absolutely necessary
-	-> access items that cannot fit in their container will wrap as soon as there is no room
+	-> excess items that cannot fit in their container will wrap as soon as there is no room
 	-> this means going to the next row below (for columns) and going to the next column (for row)
 	-> this happens while the container itself shrinks as well, and when it grows, the items take up the new space (in the opposite way)
 
@@ -86,7 +86,7 @@ Justify-content:
 
 Align-items:
 ------------
-- works on the cross access (verical)
+- works on the cross access (vertical)
 - only works if the flex-container has a height set to it
 - has a couple values: stretch, flex-start, flex-end, center
 - stretch (default)
@@ -136,7 +136,7 @@ Flex-grow
 - if the container size is small, the items all have the same size, once the container grows to a point that there is room to grow, they will grow.
 - when set on an item, that item will grow to fit the space that is available. (set a number like 1, etc)
 - can set multiple items in a container with a flex grow
-- if two or more items have a flex grow of 1, they will both grow at the same size with the space availabel
+- if two or more items have a flex grow of 1, they will both grow at the same size with the space available
 - if one of them has a flex grow of 2, it will grow at double the size 
 
 Flex-shrink
