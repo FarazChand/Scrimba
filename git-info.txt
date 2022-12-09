@@ -1,7 +1,7 @@
 https://git-scm.com/download/win			-> download git, first step
 https://code2care.org/howto/install-git-on-windows   	-> great resource to set up git for people who are confused
 https://www.youtube.com/watch?v=wrb7Gge9yoE		-> not a bad walkthrough of the commands
-
+-
 
 Creating a repo:
 - First create the remote repo on github
